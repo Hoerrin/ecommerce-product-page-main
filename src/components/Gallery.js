@@ -12,26 +12,29 @@ const GalleryContainer = styled.div`
   }
 `;
 
-const PreviewContainer = styled.div`
+const Preview = styled.img`
+  max-height: 100%;
+  max-width: 100%;
+  min-height: 200px;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
   border-radius: 0.8rem;
   overflow: hidden;
   width: fit-content;
 `;
 
-const Preview = styled.img`
-  max-height: 100%;
-  max-width: 100%;
-  aspect-ratio: 1 / 1;
-  display: flex;
-`;
-
-const Thumbnail = styled(Preview)`
+const Thumbnail = styled.img`
   max-width: 100%;
   max-height: 100%;
   aspect-ratio: 1 / 1;
   filter: ${(props) => props.isActive && "opacity(0.3)"};
   cursor: pointer;
   transition: 0.2s;
+  margin: 0 1rem;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  outline: ${(props) => props.isActive && "2px solid " + props.theme.orange};
+  background-color: white;
   &:hover {
     filter: opacity(0.6);
   }
@@ -46,26 +49,14 @@ const ThumbnailsContainer = styled.div`
   margin-top: 2rem;
 `;
 
-const ThumbnailContainer = styled.div`
-  margin: 0 1rem;
-  border-radius: 0.8rem;
-  overflow: hidden;
-  outline: ${(props) => props.isActive && "2px solid " + props.theme.orange};
-  background-color: white;
-
-`;
-
 function Gallery({ images, activePhoto, setActivePhoto, setIsFullscreenOpen }) {
   return (
     <GalleryContainer>
-      <PreviewContainer onClick={() => setIsFullscreenOpen(true)}>
-        <Preview src={images[activePhoto].fullSize}></Preview>
-      </PreviewContainer>
+        <Preview onClick={() => setIsFullscreenOpen(true)} src={images[activePhoto].fullSize}></Preview>
 
       <ThumbnailsContainer>
         {images.map((item, index) => {
           return (
-            <ThumbnailContainer key={index} isActive={activePhoto === index}>
               <Thumbnail
                 src={item.thumbnail}
                 key={index}
@@ -73,7 +64,6 @@ function Gallery({ images, activePhoto, setActivePhoto, setIsFullscreenOpen }) {
                 isActive={activePhoto === index}
                 onClick={() => setActivePhoto(index)}
               />
-            </ThumbnailContainer>
           );
         })}
       </ThumbnailsContainer>
