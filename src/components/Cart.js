@@ -10,6 +10,13 @@ const CartContainer = styled.div`
   display: flex;
   flex-flow: column;
   align-items: center;
+
+  @media only screen and (max-width: 1024px) {
+    width: 100%;
+    transform: none;
+    left: 0;
+    position: static;
+  }
 `;
 
 const CartButton = styled(IconCart)`
@@ -33,6 +40,17 @@ const CartWindow = styled.div`
   -webkit-box-shadow: 0px 1rem 2rem 0px rgb(0, 0, 0, 0.2);
   -moz-box-shadow: 0px 1rem 2rem 0px rgb(0, 0, 0, 0.2);
   box-shadow: 0px 1rem 2rem 0px rgb(0, 0, 0, 0.2);
+
+  @media only screen and (max-width: 1024px) {
+    transform: none;
+    right: 0;
+    left: 0;
+    margin: auto;
+    margin-top: 0.5rem;
+    width: calc(100% - 1rem);
+    max-width: 500px;
+    top: 4rem;
+  }
 `;
 
 const Header = styled.h2`
